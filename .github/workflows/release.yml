@@ -27,7 +27,7 @@ jobs:
         $tag = "v$version"
         $body = @{
             tag_name = "$tag"
-            target_commitish = "main"
+            target_commitish = "master"
             name = "$version"
             body = ""
             draft = $false
