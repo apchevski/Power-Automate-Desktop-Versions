@@ -1,4 +1,4 @@
-name: Power-Automate-Desktop-Versions-Release
+name: Power-Automate-Desktop-Versions
 on:
   pull_request:
     branches: [ "master" ]
@@ -15,18 +15,6 @@ jobs:
         $fileName = "Setup.Microsoft.PowerAutomate.exe"
         Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=2102613 -OutFile $fileName
         $version = $((Get-Item $fileName).VersionInfo.ProductVersion)
-        
-        # Create subfolder
-        $baseDir = "Power Automate Versions"
-        $subDir = Join-Path -Path $baseDir -ChildPath $version
-        if (-not (Test-Path -Path $subDir)) {
-            New-Item -ItemType Directory -Path $subDir
-            
-        # Move the exe file to the new version subfolder
-        Copy-Item -Path $fileName -Destination (Join-Path -Path $subDir -ChildPath $fileName)
-        } else {
-        Write-Host "Directory for version $version already exists. Skipping file placement."
-        }
 
         # Create GitHub release
         $token = "${{ secrets.GITHUB_TOKEN }}"
