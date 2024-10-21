@@ -23,7 +23,7 @@ jobs:
             New-Item -ItemType Directory -Path $subDir
             
         # Move the exe file to the new version subfolder
-        Move-Item -Path $fileName -Destination (Join-Path -Path $subDir -ChildPath $fileName)
+        Copy-Item -Path $fileName -Destination (Join-Path -Path $subDir -ChildPath $fileName)
         } else {
         Write-Host "Directory for version $version already exists. Skipping file placement."
         }
